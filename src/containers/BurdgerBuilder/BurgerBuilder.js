@@ -4,11 +4,11 @@ import Aux from '../../hoc/Auxiliary';
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
-const INGREDIENT_PRICE = {
+const INGREDIENT_PRICES = {
   salad: 0.5,
-  cheese: 0.4,
-  meat: 1.3,
-  bacon: 0.6
+  bacon: 0.4,
+  cheese: 1.3,
+  meat: 0.6
 };
 
 class BurgerBuilder extends Component {
@@ -31,19 +31,19 @@ class BurgerBuilder extends Component {
   };
 
   addIngredientHandler = (type) => {
-    const oldCount = this.state.ingredients[type],
-          updatedCount = oldCount + 1;
+    const oldCount = this.state.ingredients[type];
+    const updatedCount = oldCount + 1;
     const updatedIngredients = {
               ...this.state.ingredients
            };
     updatedIngredients[type] = updatedCount;
-    const priceAdditional = INGREDIENT_PRICE[type],
-          oldPrice = this.state.totalPrice,
-          newPrice = oldPrice + priceAdditional[type];
+    const priceAddition = INGREDIENT_PRICES[type];
+    const oldPrice = this.state.totalPrice;
+    const newPrice = oldPrice + priceAddition;
     this.setState({
       totalPrice: newPrice,
       ingredients: updatedIngredients
-    });
+     });
 
 
   };
@@ -58,9 +58,9 @@ class BurgerBuilder extends Component {
       ...this.state.ingredients
     };
     updatedIngredients[type] = updatedCount;
-    const priceDeduction = INGREDIENT_PRICE[type],
+    const priceDeduction = INGREDIENT_PRICES[type],
       oldPrice = this.state.totalPrice,
-      newPrice = oldPrice - priceDeduction[type];
+      newPrice = oldPrice - priceDeduction;
     this.setState({
       totalPrice: newPrice,
       ingredients: updatedIngredients
@@ -86,6 +86,7 @@ class BurgerBuilder extends Component {
         ingredientAdded = {this.addIngredientHandler}
         ingredientRemoved = {this.removeIngredientHandler}
         disabled = {disableInfo}
+        price={this.state.totalPrice}
 
         />
       </Aux>
