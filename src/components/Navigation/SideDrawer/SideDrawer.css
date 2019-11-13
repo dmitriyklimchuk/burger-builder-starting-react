@@ -20,6 +20,10 @@
     transform: translateX(-100%);
 }
 
+.Logo {
+    height: 11%;
+}
+
 @media screen and (min-width: 500px) {
     .SideDrawer {
         display: none;
